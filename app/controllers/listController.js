@@ -137,7 +137,6 @@ let viewByAuthor = (req, res) => {
  * function to edit List by admin.
  */
 let editList = (req, res) => {
-    console.log(req.params.listId +" Sanjay "+JSON.stringify(req.body));
     if (check.isEmpty(req.params.listId)) {
 
         console.log('ListId should be passed')
@@ -146,8 +145,7 @@ let editList = (req, res) => {
     } else {
 
         let options = req.body;
-        console.log(options);
-        listModel.update({ 'ListId': req.params.listId }, options, { multi: true }).exec((err, result) => {
+        listModel.update({ 'listId': req.params.listId }, options, { multi: true }).exec((err, result) => {
 
             if (err) {
 
@@ -204,7 +202,7 @@ let findListToEdit = (listId) => {
  * function to delete the assignment collection.
  */
 let deleteList = (req, res) => {
-
+console.log('req.params.listId'+req.params.listId);
     if (check.isEmpty(req.params.listId)) {
 
         console.log('ListId should be passed')
@@ -212,7 +210,7 @@ let deleteList = (req, res) => {
         res.send(apiResponse)
     } else {
 
-        listModel.remove({ 'ListId': req.params.listId }, (err, result) => {
+        listModel.remove({ 'listId': req.params.listId }, (err, result) => {
             if (err) {
                 console.log('Error Occured.')
                 logger.error(`Error Occured : ${err}`, 'Database', 10)
@@ -237,8 +235,8 @@ let deleteList = (req, res) => {
 let createList = (req, res) => {
     let listCreationFunction = () => {
         return new Promise((resolve, reject) => {
-            console.log(req.body)
-            if (check.isEmpty(req.body.title) || check.isEmpty(req.body.description) || check.isEmpty(req.body.listBody) || check.isEmpty(req.body.category)) {
+          //  console.log(req.body)
+            if (check.isEmpty(req.body.title) || check.isEmpty(req.body.description) || check.isEmpty(req.body.bodyHtml) || check.isEmpty(req.body.category)) {
 
                 console.log("403, forbidden request");
                 let apiResponse = response.generate(true, 'required parameters are missing', 403, null)
@@ -253,7 +251,7 @@ let createList = (req, res) => {
                     listId: listId,
                     title: req.body.title,
                     description: req.body.description,
-                    bodyHtml: req.body.listBody,
+                    bodyHtml: req.body.bodyHtml,
                     category: req.body.category,
                     author: req.body.fullName,
                     created: today,

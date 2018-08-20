@@ -12,7 +12,7 @@ const globalErrorMiddleware = require('./app/middlewares/appErrorHandler');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 
-
+//    "bcrypt": "^1.0.3",
 app.use(morgan('dev'));
 
 app.use(bodyParser.json());
@@ -69,7 +69,7 @@ const server = http.createServer(app);
 console.log(appConfig);
 server.listen(appConfig.port);
 server.on('error', onError);
-//server.on('listening', onListening);
+server.on('listening', onListening);
 
 // end server listening code
 
