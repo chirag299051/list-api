@@ -1,10 +1,10 @@
 let appConfig = {};
 
-appConfig.port = 3000;
+appConfig.port = 3002;
 appConfig.allowedCorsOrigin = "*";
 appConfig.env = "dev";
 appConfig.db = {
-    uri: 'mongodb://127.0.0.1:27017/listAppDB'
+    uri: 'mongodb://13.59.36.38:27017/listAppDB'
   }
 appConfig.apiVersion = '/api/v1';
 
